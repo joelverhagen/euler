@@ -1,5 +1,6 @@
-mod problem2;
+mod problem3;
+use problem3::get_answer;
 
 fn main() {
-    println!("Problem 2: {}", problem2::get_answer());
+    println!("Problem: {}", get_answer());
 }
