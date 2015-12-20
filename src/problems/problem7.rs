@@ -24,6 +24,7 @@ fn sieve_of_eratosthenes() -> SieveOfEratosthenes {
 	SieveOfEratosthenes { next: 2, so_far: Vec::new() }
 }
 
+#[allow(dead_code)]
 pub fn get_answer() -> i32 {
 	sieve_of_eratosthenes().take(10001).last().unwrap()
 }

@@ -24,6 +24,7 @@ fn factor(of: u64) -> PrimeFactors {
 	PrimeFactors { current: 1, of: of }
 }
 
+#[allow(dead_code)]
 pub fn get_answer() -> u64 {
 	factor(600851475143).max().unwrap()
 }

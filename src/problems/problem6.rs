@@ -1,5 +1,3 @@
-use std::slice::Iter;
-
 fn sum_of_square(v: &Vec<i32>) -> i32 {
 	v.iter().map(|&i| i*i).fold(0, |s, i| s + i)
 }
@@ -9,7 +7,7 @@ fn square_of_sum(v: &Vec<i32>) -> i32 {
 	sum * sum
 }
 
-
+#[allow(dead_code)]
 pub fn get_answer() -> i32 {
 	let v: Vec<i32> = (1..101).collect();
 	let sum = sum_of_square(&v);

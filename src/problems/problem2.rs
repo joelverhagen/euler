@@ -18,6 +18,7 @@ fn get_fibonacci() -> Fibonacci {
 	Fibonacci { previous: 0, current: 1 }
 }
 
+#[allow(dead_code)]
 pub fn get_answer() -> i32 {
 	get_fibonacci().take_while(|&x| x <= 4000000).filter(|&x| x % 2 == 0).fold(0, |s, i| s + i)
 }

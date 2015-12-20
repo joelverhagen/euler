@@ -10,6 +10,7 @@ fn is_palindrome(i: i32) -> bool {
 	true
 }
 
+#[allow(dead_code)]
 pub fn get_answer() -> i32 {
 	let mut largest = 0;
 	for x in 100..1000 {

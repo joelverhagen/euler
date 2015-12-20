@@ -37,16 +37,7 @@ fn get_smallest_divisible_by(values: Vec<i32>) -> i32 {
 	i
 }
 
+#[allow(dead_code)]
 pub fn get_answer() -> i32 {
-	/*
-	let mut i = 0;
-	let mut found = false;
-	while !found {
-		i += 1;
-		found = (1..21).all(|f| i % f == 0);
-		println!("{}", i);
-	}
-	*/
-
 	get_smallest_divisible_by((1..21).collect())
 }

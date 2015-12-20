@@ -24,6 +24,7 @@ fn get_multiples(of: Vec<i32>) -> Multiples {
 	Multiples { next: *of.iter().min().unwrap(), of: of }
 }
 
+#[allow(dead_code)]
 pub fn get_answer() -> i32 {
 	get_multiples(vec![3, 5]).take_while(|&x| x < 1000).fold(0, |s, i| s + i)
 }

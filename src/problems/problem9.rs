@@ -86,6 +86,7 @@ fn get_pythagorean_triples(max_value: i32) -> PythagoreanTriples {
     PythagoreanTriples { current: PythagoreanTriple::get_min(), max_value: max_value, next: None }
 }
 
+#[allow(dead_code)]
 pub fn get_answer() -> i32 {
     let triple = get_pythagorean_triples(998).skip_while(|t| t.a + t.b + t.c != 1000).nth(0).unwrap();
     triple.a * triple.b * triple.c
