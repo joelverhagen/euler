@@ -1,4 +1,4 @@
-use support::numbers::HasDigits;
+use support::digits::HasDigits;
 
 fn is_palindrome(i: i32) -> bool {
 	let digits: Vec<u8> = i.iter_digits().collect();

@@ -1,7 +1,7 @@
 use num::pow;
 use num::bigint::BigInt;
 use num::FromPrimitive;
-use support::numbers::HasDigits;
+use support::digits::HasDigits;
 
 #[allow(dead_code)]
 pub fn get_answer() -> u64 {

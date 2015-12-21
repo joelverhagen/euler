@@ -2,7 +2,6 @@ use std::ops::{Rem, Div};
 use std::cmp::Eq;
 use std::convert::From;
 use num::ToPrimitive;
-use num::bigint::BigInt;
 
 struct IntegerDigits<T> {
 	remaining: T

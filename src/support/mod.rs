@@ -1,3 +1,3 @@
-pub mod sieve;
-pub mod numbers;
+pub mod prime;
+pub mod digits;
 
