@@ -1,8 +1,10 @@
+use support::numbers::HasDigits;
+
 fn is_palindrome(i: i32) -> bool {
-	let chars: Vec<char> = format!("{}", i).chars().collect();
-	let len = chars.len();
+	let digits: Vec<u8> = i.iter_digits().collect();
+	let len = digits.len();
 	for i in 0..len / 2 {
-		if chars[i] != chars[len - (i + 1)] {
+		if digits[i] != digits[len - (i + 1)] {
 			return false;
 		}
 	}
