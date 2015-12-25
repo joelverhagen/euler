@@ -1,22 +1,4 @@
-struct Triangles {
-    next: u64,
-}
-
-impl Triangles {
-    fn iter() -> Triangles {
-        Triangles { next: 1 }
-    }
-}
-
-impl Iterator for Triangles {
-    type Item = u64;
-
-    fn next(&mut self) -> Option<u64> {
-        let output = (1..self.next + 1).fold(0, |s, v| s + v);
-        self.next += 1;
-        Some(output)
-    }
-}
+use support::triangles::Triangles;
 
 struct Factors {
     value: u64,
