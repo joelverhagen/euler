@@ -1,7 +1,8 @@
 use support::graph::model::{Graph, NodeIndex};
 use std::collections::{VecDeque, HashSet, HashMap};
 
-fn breadth_first_search<N, E>(graph: &Graph<N, E>, start: NodeIndex) -> Vec<&N> {
+#[allow(dead_code)]
+pub fn breadth_first_search<N, E>(graph: &Graph<N, E>, start: NodeIndex) -> Vec<&N> {
     let mut nodes: VecDeque<NodeIndex> = VecDeque::new();
     let mut visited: HashSet<NodeIndex> = HashSet::new();
     let mut values: Vec<&N> = Vec::new();
@@ -29,7 +30,7 @@ fn breadth_first_search<N, E>(graph: &Graph<N, E>, start: NodeIndex) -> Vec<&N> 
 }
 
 pub struct Dijkstra {
-    Q: HashSet<NodeIndex>,
+    q: HashSet<NodeIndex>,
     dist: HashMap<NodeIndex, Option<i32>>,
     prev: HashMap<NodeIndex, Option<NodeIndex>>,
 }
@@ -41,7 +42,7 @@ struct NodeIndexAndDistance {
 
 impl Dijkstra {
     fn initialize<N>(graph: &Graph<N, i32>, start: NodeIndex) -> Dijkstra {
-        let mut Q = HashSet::new();
+        let mut q = HashSet::new();
         let mut dist = HashMap::new();
         let mut prev = HashMap::new();
 
@@ -49,24 +50,24 @@ impl Dijkstra {
         for v in 0..node_count {
             dist.insert(v, None);
             prev.insert(v, None);
-            Q.insert(v);
+            q.insert(v);
         }
 
         *dist.get_mut(&start).unwrap() = Some(0);
 
-        Dijkstra { Q: Q, dist: dist, prev: prev }
+        Dijkstra { q: q, dist: dist, prev: prev }
     }
 
     fn get_min_node(&self) -> NodeIndexAndDistance {
-        let mut u = *self.Q.iter().nth(0).unwrap();
+        let mut u = *self.q.iter().nth(0).unwrap();
         let mut u_dist_opt = self.dist.get(&u).unwrap();
-        for v in &self.Q {
+        for v in &self.q {
             let v_dist_opt = self.dist.get(&v).unwrap();
             if v_dist_opt.is_none() {
                 continue;
             }
 
-            if u_dist_opt.is_none() || v_dist_opt.unwrap() > u_dist_opt.unwrap() {
+            if u_dist_opt.is_none() || v_dist_opt.unwrap() < u_dist_opt.unwrap() {
                 u = *v;
                 u_dist_opt = v_dist_opt;
             }
@@ -75,19 +76,20 @@ impl Dijkstra {
         NodeIndexAndDistance { node: u, dist: u_dist_opt.unwrap() }
     }
 
+    #[allow(dead_code)]
     pub fn new<N>(graph: &Graph<N, i32>, start: NodeIndex) -> Dijkstra {
         let mut d = Dijkstra::initialize(graph, start);
 
-        while d.Q.len() > 0 {
+        while d.q.len() > 0 {
 
             let NodeIndexAndDistance { node: u, dist: u_dist } = d.get_min_node();
             
-            d.Q.remove(&u);
+            d.q.remove(&u);
 
             for s in graph.successors(u) {
                 let v = s.node();
                 let alt = u_dist + graph.edge(s.edge()).value();
-                let mut v_dist_opt: Option<i32> = None;
+                let v_dist_opt: Option<i32>;
                 { v_dist_opt = *d.dist.get(&v).unwrap(); }
 
                 if v_dist_opt.is_none() || alt < v_dist_opt.unwrap() {
@@ -100,11 +102,30 @@ impl Dijkstra {
         d
     }
 
+    #[allow(dead_code)]
     pub fn dist(&self) -> &HashMap<NodeIndex, Option<i32>> {
         &self.dist
     }
 
+    #[allow(dead_code)]
     pub fn prev(&self) -> &HashMap<NodeIndex, Option<NodeIndex>> {
         &self.prev
+    }
+
+    pub fn get_path(&self, end: NodeIndex) -> Option<Vec<NodeIndex>> {
+        if self.prev[&end].is_none() {
+            None
+        } else {
+            let mut path = Vec::new();
+            let mut curr = Some(end);
+            while curr.is_some() {
+                path.push(curr.unwrap());
+                curr = self.prev[&curr.unwrap()];
+            }
+
+            path.reverse();
+
+            Some(path)
+        }
     }
 }
