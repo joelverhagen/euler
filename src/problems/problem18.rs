@@ -1,12 +1,8 @@
-use support::triangles::Triangles;
-use support::graph::search::Dijkstra;
 use support::graph::build::build_triangle_graph;
-
-use std::collections::{VecDeque, HashSet, HashMap};
-
 
 #[allow(dead_code)]
 pub fn get_answer() -> i32 {
+    /*
     let input = r#"75
                    95 64
                    17 47 82
@@ -22,14 +18,14 @@ pub fn get_answer() -> i32 {
                    91 71 52 38 17 14 91 43 58 50 27 29 48
                    63 66 04 68 89 53 67 30 73 16 69 87 40 31
                    04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"#;
-    /*
+    */
     let input = r#"
 
                      3
                     7 4
                    2 4 6
                   8 5 9 3"#;
-    */
+
     let numbers: Vec<i32> = input
         .lines()
         .flat_map(|l| l.split(' '))
@@ -39,21 +35,6 @@ pub fn get_answer() -> i32 {
         .collect();
 
     let graph = build_triangle_graph(numbers);
-    /*
-    for value in breadth_first_search(&graph, 0) {
-        println!("{}", value);
-    }
-    */
-
-    let d = Dijkstra::new(&graph, 0);
-    for (k, v) in d.dist() {
-        let k_value = graph.node(*k).value();
-        if v.is_none() {
-            println!("{} {}: (none)", k, k_value);
-        } else {
-            println!("{} {}: {}", k, k_value, v.unwrap() + 75);
-        }
-    }
 
     0
 }
