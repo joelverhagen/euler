@@ -39,3 +39,26 @@ impl Iterator for Factors {
         output
     }
 }
+
+pub struct ProperDivisors {
+    factors: Factors,
+}
+
+impl ProperDivisors {
+    pub fn iter(value: u64) -> ProperDivisors {
+        ProperDivisors { factors: Factors::iter(value) }
+    }
+}
+
+impl Iterator for ProperDivisors {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<u64> {
+        let output = self.factors.next();
+        if output.is_some() && output.unwrap() == self.factors.value {
+            self.factors.next()
+        } else {
+            output
+        }
+    }
+}

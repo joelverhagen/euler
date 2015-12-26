@@ -1,7 +1,7 @@
-use support::factors::Factors;
+use support::factors::ProperDivisors;
 
 fn d(n: u64) -> u64 {
-	Factors::iter(n).fold(0, |s, v| s + v) - n
+	ProperDivisors::iter(n).fold(0, |s, v| s + v) - n
 }
 
 fn is_amicable(n: u64) -> bool {
