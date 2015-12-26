@@ -5,3 +5,4 @@ authors = ["Joel Verhagen <joel.verhagen@gmail.com>"]
 
 [dependencies]
 num = "0.1.29"
+chrono = "0.2"
