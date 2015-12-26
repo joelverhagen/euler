@@ -1,24 +1,16 @@
-struct Fibonacci {
-	previous: i32,
-	current: i32,
-}
-
-impl Iterator for Fibonacci {
-	type Item = i32;
-
-	fn next(&mut self) -> Option<i32> {
-		let next = self.previous + self.current;
-		self.previous = self.current;
-		self.current = next;
-		Some(next)
-	}
-}
-
-fn get_fibonacci() -> Fibonacci {
-	Fibonacci { previous: 0, current: 1 }
-}
+use support::num::Fibonacci;
+use num::bigint::BigUint;
+use num::ToPrimitive;
+use num::FromPrimitive;
+use num::Zero;
+use num::Integer;
 
 #[allow(dead_code)]
-pub fn get_answer() -> i32 {
-	get_fibonacci().take_while(|&x| x <= 4000000).filter(|&x| x % 2 == 0).fold(0, |s, i| s + i)
+pub fn get_answer() -> u64 {
+	Fibonacci::iter()
+		.take_while(|x| *x <= BigUint::from_u64(4000000).unwrap())
+		.filter(|x| x.is_even())
+		.fold(BigUint::zero(), |s, i| s + i)
+		.to_u64()
+		.unwrap()
 }
