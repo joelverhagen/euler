@@ -1,8 +1,5 @@
-use num::bigint::BigUint;
 use num::pow;
-use num::FromPrimitive;
 use support::digits::HasDigits;
-use std::collections::HashSet;
 
 fn get_max(p: usize) -> u64 {
 	let mut digits = 2;
